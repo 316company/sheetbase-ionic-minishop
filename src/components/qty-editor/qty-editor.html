@@ -1,0 +1,5 @@
+<div class="qty-editor">
+  <button type="button" (click)="item.qty>1?item.qty=item.qty-1:return">-</button>
+  <input type="number" min="1" [max]="max" [(ngModel)]="item.qty" />
+  <button type="button" (click)="item.qty<99?item.qty=item.qty+1:return">+</button>
+</div>

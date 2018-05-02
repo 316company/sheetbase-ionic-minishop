@@ -1,0 +1,26 @@
+app-footer {
+
+    footer.footer {
+        border-top: 1px solid #F1F1F1;
+
+        .socials {
+            text-align: center;
+            padding: 15px 0;
+
+            a {
+                margin: 0 5px;
+                color: #333;
+                border: 1px solid #F1F1F1;
+                font-size: .75em;
+                width: 35px;
+                height: 35px;
+                border-radius: 5px;
+            }
+        }
+
+        .note {
+            text-align: center;
+        }
+    }
+
+}

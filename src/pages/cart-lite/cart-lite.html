@@ -1,0 +1,52 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Your cart</ion-title>
+
+    <ion-buttons end>
+      <button ion-button color="dark">{{ cart?.count() }} items</button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <div style="padding: 50px 30px; text-align: center;" *ngIf="cart?.count() < 1">
+    <p>
+      <img src="https://png.icons8.com/color/96/000000/sad.png">
+    </p>
+    <p>No item in cart yet, please make a purchase!</p>
+  </div>
+
+  <ion-list>
+    <ion-item *ngFor="let item of cart?.items | o2a; let i = index" (click)="nav.go('product', {productId: item.$key}); viewCtrl.dismiss()">
+      <ion-avatar item-left>
+        <img [src]="item.item.thumbnail || 'https://dummyimage.com/300x300/CCCCCC/000000'">
+      </ion-avatar>
+      <h2 ion-text color="primary" [innerHtml]="item.item.title"></h2>
+      <p>{{ item.timestamp | ago }}</p>
+
+      <button ion-button item-right clear small color="dark">{{ item.qty }}</button>
+      <button ion-button item-right clear color="dark"><strong>{{ item.qty*item.item.price | appCurrency }}</strong></button>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+
+    <ion-title>
+      <button ion-button (click)="nav.go('cart'); viewCtrl.dismiss();">View detail</button>
+    </ion-title>
+    
+    <ion-buttons end>
+      <button ion-button color="dark">
+        Subtotal: {{ cart?.subtotal() | appCurrency }}
+      </button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,36 @@
+<header class="header">
+
+  <div class="brand">
+    <h1>Mini Shop</h1>
+  </div>
+
+  <nav class="main-nav">
+
+    <ul class="menu-small">
+      <li class="toggler">
+        <a href="javascript:void(0)" (click)="showMenu = showMenu ? false: true">
+          <ion-icon name="list"></ion-icon>
+        </a>
+      </li>
+
+      <li class="item-right">
+        <a href="tel:0123456789">
+          <ion-icon name="call"></ion-icon>
+        </a>
+      </li>
+      <li class="item-right">
+        <a href="javascript:void(0)" class="cart-button" (click)="showLiteCart($event)">
+          <ion-icon name="cart"></ion-icon>
+          <ion-badge color="danger" *ngIf="cart?.count() > 0">{{ cart?.count() }}</ion-badge>
+        </a>
+      </li>
+    </ul>
+
+    <ul class="menu-small-expanded" [ngClass]="{visible: showMenu}">
+      <li><a href="javascript:void(0)" (click)="nav.go('home')">Home</a></li>
+      <li><a href="javascript:void(0)" (click)="nav.go('categories')">Categories</a></li>
+      <li><a href="javascript:void(0)" (click)="nav.go('contact')">Contact</a></li>
+    </ul>
+
+  </nav>
+</header>

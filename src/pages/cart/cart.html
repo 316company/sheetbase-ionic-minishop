@@ -1,0 +1,186 @@
+<ion-header>
+  <app-header page="cart" [content]="cartContent"></app-header>
+</ion-header>
+
+<ion-content #cartContent>
+
+  <section class="section" style="padding: 50px 30px; text-align: center;" *ngIf="cart?.count() < 1">
+    <p>
+      <img src="https://png.icons8.com/color/96/000000/sad.png">
+    </p>
+    <p>No item in cart yet, please make a purchase!</p>
+    <p><button ion-button color="primary" (click)="nav.go('home')">Make purchase</button></p>    
+  </section>
+  <section class="section" *ngIf="cart?.count() > 0">
+
+    <ion-grid class="cart-wrapper">
+      <ion-row>
+
+        <ion-col col-12 col-md-8>
+
+          <ul class="order-products">
+            <li *ngFor="let item of cart?.items | o2a; let i = index">
+      
+              <ion-grid>
+                <ion-row>
+        
+                  <ion-col col-12 col-md-6 class="overview">
+                      <ion-grid>
+                        <ion-row>
+                  
+                          <ion-col col-4 (click)="nav.go('product', {productId: item.$key})">
+                            <img [src]="item.item.thumbnail || 'https://dummyimage.com/300x300/CCCCCC/000000'">
+                          </ion-col>
+                  
+                          <ion-col col-8 class="product-info">
+                            <button ion-button clear color="danger" (click)="cart.remove(item.$key)"><ion-icon name="close"></ion-icon></button>
+
+                            <h3 ion-text color="primary" [innerHtml]="item.item.title" (click)="nav.go('product', {productId: item.$key})"></h3>
+                            <p>{{ item.item.sku }}</p>
+                            <p>{{ item.timestamp | ago }}</p>
+                          </ion-col>
+        
+                        </ion-row>
+                      </ion-grid>
+                  </ion-col>
+        
+                  <ion-col col-12 col-md-6 class="meta">
+        
+                    <ion-grid>
+                      <ion-row>
+        
+                        
+                        <ion-col col-4 class="pricing">
+                          <strong>{{ item.item.price | appCurrency }}</strong> &middot;<em>{{ item.item.unit }}</em>
+                        </ion-col>
+                        
+                        <ion-col col-4 class="qty-editor">
+                          <button type="button" (click)="item.qty>1?item.qty=item.qty-1:return; cart.changeQty(item)">-</button>
+                          <input type="number" min="1" max="99" [(ngModel)]="item.qty" (input)="cart.changeQty(item)" />
+                          <button type="button" (click)="item.qty<99?item.qty=item.qty+1:return; cart.changeQty(item)">+</button>
+                        </ion-col>
+
+                        <ion-col col-4 class="amount">
+                          <strong>{{ item.qty*item.item.price | appCurrency }}</strong>
+                        </ion-col>
+                
+                      </ion-row>
+                    </ion-grid>
+        
+                  </ion-col>
+        
+                </ion-row>
+              </ion-grid>
+      
+            </li>
+          </ul>
+
+
+
+          <div class="order-customer">  
+            <strong>Shipping</strong>
+
+            <ion-list>            
+              <ion-item>
+                <ion-label stacked>Email</ion-label>
+                <ion-input type="email" placeholder="Your email" [(ngModel)]="cart.client.email" (input)="cart.update()"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label stacked>Phone</ion-label>
+                <ion-input type="tel" placeholder="Your phone number" [(ngModel)]="cart.client.tel" (input)="cart.update()"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label stacked>Address</ion-label>
+                <ion-input type="text" placeholder="Your shipping address" [(ngModel)]="cart.client.address" (input)="cart.update()"></ion-input>
+              </ion-item>
+            </ion-list>  
+          </div>
+
+
+
+          <div class="order-adjustment">
+            <strong>Optional</strong>
+
+            <ion-list>
+              <ion-item *ngIf="!cart.promo">
+                <ion-label stacked>Promotion</ion-label>
+                <ion-input type="text" placeholder="Valid promo code" #promoCode></ion-input>
+                <button ion-button item-right [disabled]="!promoCode.value" (click)="cart.applyCode(promoCode.value)">Apply</button>
+              </ion-item>
+
+              <ion-item *ngIf="cart.promo">
+                <h2><code [innerHtml]="cart.promo.code"></code></h2>
+                <p>{{ cart.promo.description }}</p>
+    
+                <button ion-button clear item-right *ngIf="cart.promo.unit==='%'">-{{ cart.promo.value }}%</button>
+                <button ion-button clear item-right *ngIf="cart.promo.unit!=='%'">-{{ cart.promo.value | appCurrency }}</button>
+                <button ion-button clear item-right color="danger" (click)="cart.removeCode()"><ion-icon name="close"></ion-icon></button>
+              </ion-item>
+            </ion-list>
+          </div>
+
+
+        </ion-col>
+
+        <ion-col col-12 col-md-4>
+
+          <div class="order-summary">
+            <strong>Summary</strong>
+
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>Items</td>
+                  <td>{{ cart?.count() }}</td>
+                </tr>
+                <tr>
+                  <td>Subtotal</td>
+                  <td>{{ cart?.subtotal() | appCurrency }}</td>
+                </tr>
+                <tr *ngIf="cart?.discount()">
+                  <td>Discount</td>
+                  <td>-{{ cart?.discount() | appCurrency }}</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td>Total</td>
+                  <td><strong>{{ cart?.subtotal()-cart?.discount() | appCurrency }}</strong></td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <div>
+              <button ion-button [disabled]="!cart?.orderReady()">Pay now</button>
+              <button ion-button [disabled]="!cart?.orderReady()">Place order</button>
+            </div>
+          </div>
+
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+
+
+  </section>
+
+
+
+
+  <section class="section">
+    <div class="caption">
+      <strong>More products</strong>
+    </div>
+
+    <app-products [products]="products"></app-products>
+
+  </section>
+
+
+
+  <app-footer></app-footer>
+
+</ion-content>
+  

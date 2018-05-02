@@ -1,0 +1,152 @@
+// http://ionicframework.com/docs/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+
+button {    
+    outline: 0 !important;
+}
+
+// fix bootstrap .row conflict
+ion-row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+
+
+.form-control {
+    padding: .9rem 1.3rem;
+    font-size: 1.35rem;
+}
+select.form-control {
+    height: 40px !important;
+}
+.btn {
+    font-size: 1.4rem;
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+
+
+
+.table {
+    font-size: 1.1em;
+    
+    .subtitle {
+        color: #777;
+        font-size: 1em;
+    }
+}
+
+
+
+
+.section {
+    .caption {
+        margin-top: 30px;
+        padding: 0 10px;
+        text-align: center;
+        position: relative;
+
+        &:before {
+            content: '';
+            width: calc(100% - 20px);
+            height: 2px;
+            background: #F1F1F1;
+            position: absolute;
+            left: 0;
+            top: 12px;
+            z-index: -1;
+            margin-left: 10px;
+        }
+
+        strong {
+            font-size: 1.3em;
+            text-transform: uppercase;
+            display: inline-block;
+            background: #FFF;
+            z-index: 1;
+            padding: 0 5px;
+        }
+
+        p {
+            font-size: 1.2em;
+        }
+    }
+
+}
+
+
+
+.qty-editor {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    button, input {
+        display: block;
+    }
+
+    button {
+        background: #FFF;
+        font-size: 1.2em;
+        width: 35px;
+        height: 35px !important;
+        padding: 5px;
+        border: 1px solid #F1F1F1;
+        font-family: monospace;
+
+        &:first-child {
+            border-radius: 5px 0 0 5px;
+        }
+        &:last-child {
+            border-radius: 0 5px 5px 0;
+        }
+    }
+    
+    input {
+        font-size: 1em;
+        width: 35px;
+        height: 35px !important;
+        padding: 5px 2px;
+        border: 1px solid #F1F1F1;
+        box-shadow: none;
+        text-align: center;
+
+        &::-webkit-inner-spin-button, 
+        &::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+    }
+}
+
+
+
+
+
+.big-popover .popover-content {
+    width: calc(100% - 25px);
+    max-width: 500px;
+}
+
+button.alert-button.danger {
+    color: #e51c23;
+}

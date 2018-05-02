@@ -1,0 +1,40 @@
+qty-editor {
+
+    .qty-editor {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+
+        button, input {
+            display: block;
+        }
+
+        button {
+            background: #FFF;
+            font-size: 1.3em;
+            width: 36px;
+            height: 36px;
+            padding: 5px;
+            border: 1px solid #F1F1F1;
+
+            &:first-child {
+                border-radius: 5px 0 0 5px;
+            }
+            &:last-child {
+                border-radius: 0 5px 5px 0;
+            }
+        }
+        
+        input {
+            font-size: 1em;
+            width: 36px;
+            height: 36px;
+            padding: 5px;
+            border: 1px solid #F1F1F1;
+            box-shadow: none;
+            text-align: center;
+        }
+    }
+
+}

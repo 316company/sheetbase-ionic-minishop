@@ -1,0 +1,106 @@
+app-header {
+
+    .brand {
+        padding: 15px 10px;
+
+        h1 {
+            margin-top: 10px;
+            text-align: center;
+            font-family: 'Comfortaa', cursive;
+        }
+    }
+
+
+    .main-nav {
+        position: relative;
+        
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            color: #333;
+            text-transform: uppercase;
+        }
+        
+        .menu-small {
+            background: #FFF;
+            padding: 5px 10px;
+            border: 1px solid #F1F1F1;
+
+            &::after {
+                content: '';
+                display: block;
+                clear: both;
+            }
+
+            a {
+                display: block;
+                font-size: 1.2em;
+                padding: 5px 10px;
+                border-radius: 5px;
+                border: 1px solid #F1F1F1;
+                float: left;
+                margin: 0 5px;
+            }
+
+            .item-right {
+                float: right;
+            }
+
+
+            .cart-button {
+                position: relative;
+
+                .badge {
+                    position: absolute;
+                    display: inline-block;
+                    top: -10px;
+                    right: -7px;
+                    font-size: .7em;
+                    padding: 3px 4px;
+                    font-size: 500;
+                }
+            }
+        }
+
+        .menu-small-expanded {
+            background: #FFF;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity .3s ease-in-out;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            top: -1000px;
+            box-shadow: 0 3px 5px #AAA;
+            
+            &.visible {
+                top: 45px;
+                opacity: 1;
+                z-index: 999999;
+            }
+            
+            
+            li {
+                width: 100%;
+                background: #FFF;
+   
+               a {
+                   display: block;
+                   width: 100%;
+                   padding: 10px 20px;
+                   border-bottom: 1px solid #F1F1F1;
+                   text-decoration: none;
+               }
+   
+               &.activated a {
+                   text-decoration: underline;
+               }
+           }
+        }
+    }
+
+}

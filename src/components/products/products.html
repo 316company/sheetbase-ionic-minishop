@@ -1,0 +1,34 @@
+<ul class="products-list">
+  <li *ngFor="let item of products | filter: keyword" (click)="nav.go('product', {product: item, productId: item.$key})">
+    <div class="item-thumbnail">
+      <img [src]="item.thumbnail || 'https://dummyimage.com/600x400/cccccc/fff'">
+    </div>
+
+    <div class="item-content">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-8>
+            <h3 ion-text color="primary" [innerHtml]="item.title" ></h3>
+          </ion-col>
+          <ion-col col-4>
+            <div class="pricing">
+              <strong>{{ item.price | appCurrency }}</strong> &middot;<em>{{ item.unit }}</em>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    
+    <div class="item-description">
+      <p>{{ item.description }}</p>
+    </div>
+    
+    <div class="item-foot">
+      <div class="item-actions">
+        <button ion-button color="light" (click)="cart.add(item); nav.go('cart'); $event.stopPropagation()">Buy</button>
+        <button ion-button color="primary" (click)="cart.add(item); $event.stopPropagation()">+ <ion-icon name="cart"></ion-icon> </button>
+      </div>
+    </div>
+      
+  </li>      
+</ul>    

@@ -1,0 +1,87 @@
+<ion-header>
+  <app-header page="product" [content]="productContent"></app-header>
+</ion-header>
+
+<ion-content #productContent>
+
+  <section class="section" class="product-wrapper">
+    <div style="text-align: center; padding: 15px;" *ngIf="!product"><ion-spinner></ion-spinner></div>
+    
+    <div *ngIf="product">
+      <ion-grid>
+        <ion-row>
+  
+          <ion-col col-12 col-6>
+            <div class="image-single" *ngIf="!product.images">
+              <img [src]="product.image || 'https://dummyimage.com/800x600/cccccc/fff'" [alt]="product.title">
+            </div>
+            <div class="image-slideshow" *ngIf="product.images">
+              Image slideshow ...
+            </div>
+          </ion-col>
+          <ion-col col-12 col-6>
+            
+            <ion-grid class="product-content">
+              <ion-row>
+                <ion-col col-8>
+                  <h3 ion-text color="primary" [innerHtml]="product.title"></h3>
+                </ion-col>
+                <ion-col col-4>
+                  <div class="pricing">
+                    <strong>{{ product.price | appCurrency }}</strong> &middot;<em>{{ product.unit }}</em>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+            <div class="product-description">
+              <p>{{ product.description }}</p>
+            </div>
+
+            <ion-grid class="product-foot">
+              <ion-row>
+                <ion-col col-3>
+                  <button ion-button color="light" (click)="cart.add(product, productQty); nav.go('cart'); $event.stopPropagation()">Buy</button>
+                </ion-col>
+                
+                <ion-col col-6 class="qty-editor">
+                  <button type="button" (click)="productQty>1?productQty=productQty-1:return">-</button>
+                  <input type="number" min="1" max="99" [(ngModel)]="productQty" />
+                  <button type="button" (click)="productQty<99?productQty=productQty+1:return">+</button>
+                </ion-col>
+                
+                <ion-col col-3>
+                  <button ion-button color="primary" (click)="cart.add(product, productQty); $event.stopPropagation()">+ <ion-icon name="cart"></ion-icon></button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-col>
+  
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid class="product-detail">
+        <ion-row>
+          <ion-col col-12>
+            <h3>Detail</h3>
+            <article [innerHtml]="product.content"></article>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </section>
+
+
+  <section class="section" *ngIf="products">
+    <div class="caption">
+      <strong>More products</strong>
+    </div>
+
+    <app-products [products]="products"></app-products>
+  </section>
+
+
+
+  <app-footer></app-footer>
+
+</ion-content>

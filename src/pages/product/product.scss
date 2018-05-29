@@ -6,6 +6,13 @@ page-product {
         border: 1px solid #F1F1F1;
         border-radius: 5px;
 
+        max-width: 1000px;
+        margin: auto;
+
+        img {
+            width: 100%;
+        }
+
         ion-grid, ion-col {
             padding: 0;
         }

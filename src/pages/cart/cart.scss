@@ -156,4 +156,13 @@ page-cart {
         }
     }
 
+
+
+
+    @media(min-width: 768px) {
+        .order-products .meta {
+            padding-top: 20px !important;
+        }
+    }
+
 }

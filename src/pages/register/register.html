@@ -1,0 +1,56 @@
+<ion-header>
+  <app-header page="register" [content]="registerContent"></app-header>
+</ion-header>
+
+
+<ion-content #registerContent>
+
+  <section class="section">
+    <ion-grid>
+      <ion-row>
+
+        <ion-col col-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4>
+          <p style="padding: 10px; border: 1px solid #333;">(!) Please use <strong>fake email/password</strong> to register the account, because the database will be public for demonstration purpose.</p>
+
+          <form [formGroup]="registerFormGroup" (ngSubmit)="createAccount()" #registerForm="ngForm">
+            <h3 style="margin-bottom: 30px;">Create a account</h3>
+  
+            <div class="form-group">
+              <label for="email">Your email</label>
+              <input type="email" class="form-control" id="email" formControlName="email" [(ngModel)]="credential.email" name="email" placeholder="Enter your email">
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" formControlName="password" [(ngModel)]="credential.password" name="password" placeholder="Enter password">
+            </div>
+
+            <div class="form-group">
+              <label for="passwordAgain">Repeat password</label>
+              <input type="password" class="form-control" id="passwordAgain" formControlName="passwordRepeat" [(ngModel)]="credential.passwordRepeat" name="passwordRepeat" placeholder="Enter password again">
+            </div>
+            
+            <ion-grid style="padding-left: 0; padding-right: 0;">
+              <ion-row>
+                <ion-col col-5 style="padding-left: 0;">
+                  <a href="javascrip:void(0)" (click)="nav.go('login')">Already have a account?</a>
+                </ion-col>
+                <ion-col col-7 style="text-align: right;">
+                  <button ion-button type="submit" [disabled]="!registerForm.form.valid || registerDisabled">Create account</button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </form>
+
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+  </section>
+
+
+
+  <app-footer></app-footer>
+
+</ion-content>
+  

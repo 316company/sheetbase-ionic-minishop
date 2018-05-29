@@ -1,6 +1,8 @@
 import { Component, Input, NgZone } from '@angular/core';
 import { Content, PopoverController } from 'ionic-angular';
 
+import { UserService as UserProvider } from "sheetbase-angular";
+
 import { NavProvider } from '../../providers/nav/nav';
 import { CartProvider } from '../../providers/cart/cart';
 
@@ -17,8 +19,9 @@ export class HeaderComponent {
 
   constructor(
     private zone: NgZone,
-
     private popoverCtrl: PopoverController,
+
+    private sheetbaseUser: UserProvider,
 
     private nav: NavProvider,
     private cart: CartProvider

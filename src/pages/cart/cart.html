@@ -76,9 +76,14 @@
           </ul>
 
 
+        </ion-col>
+
+        <ion-col col-12 col-md-4>
 
           <div class="order-customer">  
             <strong>Shipping</strong>
+
+            <p style="padding: 10px; border: 1px solid #333;">(!) Please using <strong>fake info</strong> only, because the database will be public for demonstration purpose.</p>
 
             <ion-list>            
               <ion-item>
@@ -121,11 +126,6 @@
             </ion-list>
           </div>
 
-
-        </ion-col>
-
-        <ion-col col-12 col-md-4>
-
           <div class="order-summary">
             <strong>Summary</strong>
 
@@ -153,8 +153,9 @@
             </table>
 
             <div>
-              <button ion-button [disabled]="!cart?.orderReady()">Pay now</button>
-              <button ion-button [disabled]="!cart?.orderReady()">Place order</button>
+              <!-- <button ion-button [disabled]="!cart?.orderReady()">Pay now</button> -->
+              <button ion-button [disabled]="!cart?.orderReady()" (click)="cart.placeOrder()">Place order</button>
+              <button ion-button clear color="danger" (click)="cart.clear()">Clear cart</button>
             </div>
           </div>
 

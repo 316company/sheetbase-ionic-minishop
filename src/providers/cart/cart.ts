@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AlertController, ToastController } from 'ionic-angular';
 
-import { SheetbaseService as SheetbaseProvider } from 'sheetbase-angular';
+import { DataService as DataProvider, ApiService as ApiProvider } from 'sheetbase-angular';
 
 import { StorageProvider } from '../../providers/storage/storage';
 
@@ -22,7 +22,8 @@ export class CartProvider {
     private alertCtrl: AlertController,
     private toastCtrl: ToastController,
 
-    private sheetbase: SheetbaseProvider,
+    private sheetbaseData: DataProvider,
+    private sheetbaseApi: ApiProvider,
 
     private storage: StorageProvider
   ) {
@@ -34,7 +35,7 @@ export class CartProvider {
     });
 
 
-    this.sheetbase.get('promo')
+    this.sheetbaseData.get('promo')
     .subscribe(promoItems => {
       this.promoItems = promoItems;          
     });
@@ -142,6 +143,27 @@ export class CartProvider {
     }
   }
 
+  clear() {
+    let alert = this.alertCtrl.create({
+      title: 'Cart',
+      message: 'Clear cart?'
+    });
+
+    alert.addButton({
+      text: 'Clear',
+      cssClass: 'danger',
+      handler: () => {        
+        this.storage.update({
+          'userCart/items': null,
+          'userCart/promo': null
+        }).then(() => { return });
+      }
+    });
+    alert.addButton('Cancel');
+
+    return alert.present();
+  }
+
 
   changeQty(item: any) {
     item.qty = item.qty !== 0 ? Math.abs(item.qty): 1;
@@ -193,6 +215,74 @@ export class CartProvider {
       this.client.email && this.client.tel && this.client.address
     ) status = true;
     return status;
+  }
+
+
+  placeOrder() {
+    let alert = this.alertCtrl.create({
+      title: 'Cart',
+      message: 'Place order now?'
+    });
+
+    alert.addButton({
+      text: 'Confirm',
+      handler: () => {
+        let orderData: any = Object.assign({}, {
+          client: this.client,
+          count: this.count(),
+          subtotal: this.subtotal(),
+          total: this.subtotal()-this.discount(),
+          items: this.items,
+        });
+
+        if(this.discount()) {
+          orderData.discount = this.discount();
+        }
+
+        if(this.promo) {
+          orderData.promoCode = this.promo.code.toUpperCase();
+        }
+        
+        this.sheetbaseApi.POST('/order/create', {},
+          {
+            orderData
+          }
+        ).subscribe(order => {
+          let alert = this.alertCtrl.create({
+            title: 'Success',
+            message: 'Your order has been created. We will get in touch with you soon!'
+          });
+          
+          alert.addButton({
+            text: 'Clear cart',
+            handler: () => {
+              this.storage.update({
+                'userCart/items': null,
+                'userCart/promo': null
+              }).then(() => { return });
+            }
+          });
+          alert.addButton('OK');
+          
+          alert.present();
+        }, error => {
+          let alert = this.alertCtrl.create({
+            title: 'Error!',
+            message: `
+              There were errors, please try again:
+              <ul>
+                <li>${error.meta ? error.meta.message: 'Unknown errors!'}</li>
+              </ul>
+            `,
+            buttons: ['OK']
+          });
+          alert.present();
+        });
+      }
+    });
+    alert.addButton('Cancel');
+
+    return alert.present();
   }
 
 }

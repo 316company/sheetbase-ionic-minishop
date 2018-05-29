@@ -18,7 +18,7 @@ import { CartLitePage } from '../pages/cart-lite/cart-lite';
 
 import { PipesModule } from '../pipes/pipes.module';
 
-import { SITE_CONFIG } from '../configs/site.config';
+import { APP_CONFIG } from '../configs/app.config';
 
 import { NavProvider } from '../providers/nav/nav';
 import { StorageProvider } from '../providers/storage/storage';
@@ -40,7 +40,7 @@ import { CartProvider } from '../providers/cart/cart';
       pageTransition: 'wp-transition'
     }),
     IonicStorageModule.forRoot({
-      name: SITE_CONFIG.uri || 'storage.sheetbase',
+      name: APP_CONFIG.uri || 'sheetbase.storage',
       driverOrder: ['indexeddb', 'localstorage']
     }),
 
@@ -55,7 +55,7 @@ import { CartProvider } from '../providers/cart/cart';
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    {provide: LOCALE_ID, useValue: SITE_CONFIG.locale||'en-US'},
+    {provide: LOCALE_ID, useValue: APP_CONFIG.locale||'en-US'},
 
     // {provide: APP_BASE_HREF, useValue: '/'},
 

@@ -5,11 +5,10 @@
 var Order = (function (__this) {
 
     __this.create = function (orderData) {
-        if (!orderData)
-            return Sheetbase.AppError.make(
-                'order/missing-info',
-                'Missing order information!'
-            );
+        if (!orderData) return Sheetbase.AppError.client(
+            'order/missing-info',
+            'Missing order information!'
+        );
 
         // TODO: validate order data
 
@@ -30,36 +29,35 @@ var Order = (function (__this) {
         // append preparedOrder
         var newOrder = new OrderTable(preparedOrder);
         var newSavedOrder = newOrder.save();
-        if (!newSavedOrder)
-            return Sheetbase.AppError.make(
-                'order/action-fails',
-                'Errors happen when saving order, please try again!'
-            );
+        if (!newSavedOrder) return Sheetbase.AppError.client(
+            'order/action-fails',
+            'Errors happen when saving order, please try again!'
+        );
 
         // send email to operator and customer
-        var bcc = (orderData.client && orderData.client.email) ? orderData.client.email : null;
-        var recipient = Sheetbase.Config.get('operatorEmail') || bcc;
-        var template = TemplateEmail.order(newSavedOrder);
-        var title = template.title;
-        var bodyText = template.text;
-        var bodyHtml = template.html;
+        // var bcc = (orderData.client && orderData.client.email) ? orderData.client.email : null;
+        // var recipient = Sheetbase.Config.get('operatorEmail') || bcc;
+        // var template = TemplateEmail.order(newSavedOrder);
+        // var title = template.title;
+        // var bodyText = template.text;
+        // var bodyHtml = template.html;
 
-        var options = {
-            name: Sheetbase.Config.get('siteName') || 'Sheetbase.net App',
-            htmlBody: bodyHtml
-        };
-        if (bcc) options.bcc = bcc;
+        // var options = {
+        //     name: Sheetbase.Config.get('siteName') || 'Sheetbase.net App',
+        //     htmlBody: bodyHtml
+        // };
+        // if (bcc) options.bcc = bcc;
 
-        if (recipient) {
-            try {
-                GmailApp.sendEmail(recipient, title, bodyText, options);
-            } catch (error) {
-                return Sheetbase.AppError.make(
-                    'mail/not-sent',
-                    'Email not sent!'
-                );
-            }
-        }
+        // if (recipient) {
+        //     try {
+        //         GmailApp.sendEmail(recipient, title, bodyText, options);
+        //     } catch (error) {
+        //         return Sheetbase.AppError.server(
+        //             'order/email-not-sent',
+        //             'Email not sent!'
+        //         );
+        //     }
+        // }
 
         return {
             '#': newSavedOrder['#'],

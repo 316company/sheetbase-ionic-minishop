@@ -1,0 +1,77 @@
+<ion-header>
+  <app-header page="profile" [content]="profileContent"></app-header>
+</ion-header>
+
+
+<ion-content #profileContent>
+
+    <section class="section" *ngIf="!statusChecked" style="padding: 50px 0; text-align: center;">
+        <ion-spinner></ion-spinner>
+      </section>
+    
+      <section class="section" *ngIf="statusChecked && sheetbaseUser.getUser()">
+    
+        <ion-grid>
+
+          <ion-row>
+            <ion-col col-12 col-md-8 offset-md-2>
+              <h3>Your profile</h3>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+    
+            <ion-col col-12 col-md-4 col-lg-3 offset-lg-1 col-xl-2 offset-xl-2>
+    
+              <ion-grid style="padding: 0;">
+                <ion-row>
+                  <ion-col col-12 col-sm-6 col-md-12>
+                    <ion-list>
+                      <ion-item>
+                        <ion-thumbnail item-left>
+                          <img [src]="sheetbaseUser?.getUser()?.photoUrl || 'https://dummyimage.com/250x250/cccccc/cccccc'" style="border-radius: 100%;">
+                        </ion-thumbnail>
+                        <h3>{{ sheetbaseUser?.getUser()?.displayName || 'Username' }}</h3>
+                        <p><em>{{ sheetbaseUser?.getUser()?.email }}</em></p>
+                      </ion-item>
+                    </ion-list>
+
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+    
+    
+            </ion-col>
+    
+            <ion-col col-12 col-md-8 col-lg-7 col-xl-6>
+
+              <p>Profile can be updated as usual, we'll add the function later, yay! :D</p>
+    
+              <!-- <ion-list>
+                <ion-list-header>
+                  User profile
+                </ion-list-header>
+                <ion-item>
+                  <h2>Address</h2>
+                  <p>{{ sheetbaseUser?.getUser()?.address || 'n/a'}}</p>
+                </ion-item>
+                <button ion-item (click)="logout()">
+                  Logout
+                </button>
+              </ion-list> -->
+
+              <button ion-button outline small color="dark" (click)="logout()">
+                Logout
+              </button>
+
+            </ion-col>
+
+          </ion-row>
+        </ion-grid>
+      </section>
+
+
+  <app-footer></app-footer>
+
+</ion-content>
+  

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavParams } from 'ionic-angular';
 
-import { SheetbaseService as SheetbaseProvider } from 'sheetbase-angular';
+import { DataService as DataProvider } from 'sheetbase-angular';
 
 import { NavProvider } from '../../providers/nav/nav';
 import { MetaProvider } from '../../providers/meta/meta';
@@ -28,7 +28,7 @@ export class ProductPage {
   constructor(
     private params: NavParams,
 
-    private sheetbase: SheetbaseProvider,
+    private sheetbaseData: DataProvider,
     
     private nav: NavProvider,
     private meta: MetaProvider,
@@ -46,12 +46,10 @@ export class ProductPage {
     });
   }
 
-  ngOnInit() {
-    console.log('Run init!');
-    
+  ngOnInit() {    
     if(this.product) this.getRelatedProducts();
     if(!this.product && this.productId) {
-      this.sheetbase.get(
+      this.sheetbaseData.get(
         'products', this.productId
       ).subscribe(product => {
         this.product = product;
@@ -63,7 +61,7 @@ export class ProductPage {
 
 
   getRelatedProducts() {
-    this.sheetbase.get('products', null, {
+    this.sheetbaseData.get('products', null, {
       orderByKey: Object.keys(this.product.tags||{})[0] ? ('tags/'+ Object.keys(this.product.tags)[0]): ('categories/'+ (Object.keys(this.product.categories||{})[0] ? Object.keys(this.product.categories)[0]: 'uncategorized')),
       equalTo: '!null',
 
@@ -72,7 +70,7 @@ export class ProductPage {
       if(products.length >= 12) return this.finalizeRelatedProducts(products);
 
       // get recent products
-      this.sheetbase.get('products', null, {
+      this.sheetbaseData.get('products', null, {
         orderByKey: 'data',
         order: 'desc',
 

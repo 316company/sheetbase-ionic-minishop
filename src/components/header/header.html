@@ -14,6 +14,11 @@
       </li>
 
       <li class="item-right">
+        <a href="javascript:void(0)" (click)="sheetbaseUser?.getUser() ? nav.go('profile', {bypassChecker: true}): nav.go('login', {bypassChecker: true})">
+          <ion-icon name="person"></ion-icon>
+        </a>
+      </li>
+      <li class="item-right">
         <a href="tel:0123456789">
           <ion-icon name="call"></ion-icon>
         </a>
@@ -29,7 +34,7 @@
     <ul class="menu-small-expanded" [ngClass]="{visible: showMenu}">
       <li><a href="javascript:void(0)" (click)="nav.go('home')">Home</a></li>
       <li><a href="javascript:void(0)" (click)="nav.go('categories')">Categories</a></li>
-      <li><a href="javascript:void(0)" (click)="nav.go('contact')">Contact</a></li>
+      <!-- <li><a href="javascript:void(0)" (click)="nav.go('contact')">Contact</a></li> -->
     </ul>
 
   </nav>

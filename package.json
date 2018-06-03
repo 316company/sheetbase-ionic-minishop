@@ -33,7 +33,7 @@
     "object-path": "^0.11.4",
     "pubsub-js": "^1.6.0",
     "rxjs": "5.5.10",
-    "sheetbase-angular": "file:../../core/sheetbase-angular/dist/sheetbase-angular-0.0.8.tgz",
+    "sheetbase-angular": "0.0.9",
     "sw-toolbox": "3.6.0",
     "zone.js": "0.8.26"
   },

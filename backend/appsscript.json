@@ -4,8 +4,7 @@
     "libraries": [{
       "userSymbol": "Sheetbase",
       "libraryId": "1ZUoDbpEwu4DC3i5tHsNMm3ng7smMWSsH4GzUvwCttlCHplOP2ly7Kzgw",
-      "version": "3",
-      "developmentMode": true
+      "version": "3"
     }]
   },
   "webapp": {

@@ -34,7 +34,7 @@ import { CartProvider } from '../providers/cart/cart';
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp, {
-      // locationStrategy: 'path',
+      locationStrategy: 'path',
       backButtonText: '',
       mode: 'md',
       pageTransition: 'wp-transition'
@@ -57,7 +57,7 @@ import { CartProvider } from '../providers/cart/cart';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     {provide: LOCALE_ID, useValue: APP_CONFIG.locale||'en-US'},
 
-    // {provide: APP_BASE_HREF, useValue: '/'},
+    {provide: APP_BASE_HREF, useValue: '/'},
 
     NavProvider,
     StorageProvider,

@@ -1,0 +1,18 @@
+{
+    "name": "ionic-minishop",
+    "type": "ionic",
+	"driveFolder": "1Oh3ogmTHMlkLNqNW5HtlcPBd2RXDK3wT",
+	"configs": {
+		"frontend": {
+			"apiKey": "Qust4st72eFe374ewrechedrUpheStan",
+			"backendUrl": "https://script.google.com/macros/s/AKfycbxfe9TJ2UBnJCgtF5m0yMH04foKedq1QWTh30MG-r6hcXXYOnQ/exec"
+		},
+		"backend": {
+			"apiKey": "Qust4st72eFe374ewrechedrUpheStan",
+			"databaseId": "16lJqaPMwibp8NTCZuKqGllX7VAVQdV_5w6we7O3ueNA",
+			"encryptionKey": "mA=@H7#EVe8r",
+			"contentFolder": "13v-Ae5Xfq3MpQNVl0PouNFI6BGabWI3Z"
+		}
+	},
+	"options": {}
+}

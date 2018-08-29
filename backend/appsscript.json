@@ -1,0 +1,15 @@
+{
+  "timeZone": "Asia/Bangkok",
+  "dependencies": {
+    "libraries": [{
+      "userSymbol": "Sheetbase",
+      "libraryId": "1ZUoDbpEwu4DC3i5tHsNMm3ng7smMWSsH4GzUvwCttlCHplOP2ly7Kzgw",
+      "version": "3"
+    }]
+  },
+  "webapp": {
+    "access": "ANYONE_ANONYMOUS",
+    "executeAs": "USER_DEPLOYING"
+  },
+  "exceptionLogging": "STACKDRIVER"
+}

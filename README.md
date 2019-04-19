@@ -1,3 +1,7 @@
+# ⛔️ DEPRECATED
+
+Please use <https://github.com/sheetbase-themes/minishop-angular> instead.
+
 # Sheetbase Theme: Ionic Mini Shop
 
 Mini Shop theme for Sheetbase project based on Ionic.
